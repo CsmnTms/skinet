@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿/* using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -46,3 +46,5 @@ namespace Infrastructure.Data
         
     }
 }
+
+*/ 
