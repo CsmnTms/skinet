@@ -1,3 +1,4 @@
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,9 +23,10 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container. 
         // Referred to as the Dependency Injection Container. 
         // Any services we want to add to our app that we then want to make available to other parts of our app, we add to this method.
+        // order does not matter here
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllers();
             // gets the connection from the appsetings.dev.json
             services.AddDbContext<StoreContext>(x => 
@@ -34,6 +36,7 @@ namespace API
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         // This is where we add middleware (which can do various things to requests)
+        // order matters here
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
