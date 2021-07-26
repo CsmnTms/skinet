@@ -34,6 +34,13 @@ namespace API
             );
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,7 @@ namespace API
             app.UseHttpsRedirection(); // if a request comes on the http url, it redirects it to the https
             app.UseRouting(); // responsible for getting us to the controller that we're hitting
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
             app.UseSwaggerDocumentation();
             // maps the endpoints in the controller so the API know where to send the requests to us
