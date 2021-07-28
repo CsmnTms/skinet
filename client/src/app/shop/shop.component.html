@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
     <section class="col-3">
-      <h5 class="text-warning ml-3">Sort</h5>
+      <ng-container *ngIf="types && brands">
+      <h5 class="text-warning ml-3 mt-4 mb-3">Sort</h5>
       <select
         name=""
         id=""
-        class="custom-select mb-3"
+        class="custom-select mb-4"
         (change)="onSortSelected(handleInput($event))"
       >
         <option *ngFor="let sort of sortOptions" [value]="sort.value">
@@ -39,6 +40,7 @@
           {{ type.name }}
         </li>
       </ul>
+    </ng-container>
     </section>
 
     <section class="col-9">
@@ -50,7 +52,7 @@
         [pageNumber]="shopParams.pageNumber">
       </app-paging-header>
 
-        <div class="form-inline mt-2">
+        <div class="form-inline" *ngIf="products">
           <input
             (keyup.enter)="onSearch()"
             type="text"
